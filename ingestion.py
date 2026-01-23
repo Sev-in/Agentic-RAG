@@ -4,6 +4,7 @@ from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
+
 load_dotenv()
 
 urls = ["https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/",
@@ -30,8 +31,10 @@ doc_splits = text_splitter.split_documents(docs_list)
 
 # Benzerlik aramaları yapabilmemizi sağlar.
 retriever = Chroma(
-        collection_name="rag-chroma",
-        persist_directory="./.chroma",
-        embedding_function=GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+    collection_name="rag-chroma",
+    persist_directory="./.chroma",
+    embedding_function=GoogleGenerativeAIEmbeddings(
+        model="models/text-embedding-004"
+    )
 ).as_retriever()
 
