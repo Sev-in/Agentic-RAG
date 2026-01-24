@@ -1,16 +1,20 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from langchain_core.runnables import RunnableSequence
+from typing import Literal
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0
+)
 
 class GradeHallucinations(BaseModel):
     """
     Binary score for hallucination present in generated answer.
     """
 
-    binary_score: bool = Field(
+    binary_score: Literal["yes", "no"] = Field(
         description="Answer is grounded in the facts, 'yes' or 'no'",
     )
 

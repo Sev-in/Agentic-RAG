@@ -1,4 +1,4 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from langchain_core.runnables import RunnableSequence
@@ -9,7 +9,10 @@ class GradeAnswer(BaseModel):
         description="Answer addresses the question, 'yes' or 'no'"
     )
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0
+)
 structured_llm_grader = llm.with_structured_output(GradeAnswer)
 
 system_prompt ="""

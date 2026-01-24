@@ -1,4 +1,4 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
@@ -12,7 +12,10 @@ class GradeDocuments(BaseModel):
         description="Documents are relevant to the question, 'yes' or 'no'"
     )
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0
+)
 
 #LLM'e "Bana rastgele metin üretme, yukarıda tanımladığım GradeDocuments şemasına uygun bir JSON objesi üret" talimatı verir.
 structered_llm_grader = llm.with_structured_output(GradeDocuments)
