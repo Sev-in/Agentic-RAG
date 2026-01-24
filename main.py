@@ -4,6 +4,6 @@ load_dotenv()
 from graph.graph import app
 
 if __name__ == "__main__":
-    print(
-        app.invoke(input={"question":"what is pizza?"})
-    )
+    state= app.invoke(input={"question":"what is pizza?"})
+    print(state["generation"])
+
