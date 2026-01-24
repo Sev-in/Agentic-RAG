@@ -12,7 +12,8 @@ def web_search(state: GraphState) -> Dict[str, Any]:
     print("-----WEB SEARCH-----")
 
     question = state["question"]
-    documents = state["documents"]
+    # Eğer documents anahtarı yoksa boş bir liste döndür, varsa mevcut olanı al
+    documents = state.get("documents", [])
 
     tavily_results = web_search_tool.invoke({"query":question})
     joined_tavily_result = "\n".join(
